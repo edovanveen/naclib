@@ -1,20 +1,15 @@
-"""
-To use locally:
-
-"setup.py develop"
-
-To remove from current environment:
-"setup.py develop --uninstall"
-
-"""
 import setuptools
-import os,shutil
-
 
 long_description = """
+NAClib is a python library for applying a global alignment method
+for single-molecule fluorescence microscopy, using S/T Polynomial
+Decomposition (STPD). STPD employs linear combinations of Zernike
+polynomial gradients to decompose the distortion between two images,
+correcting both affine and higher-order components of the distortion
+in a single step, while requiring only minimal reference data.
 """
 
-pk = setuptools.find_packages(exclude=['utils'])
+pk = setuptools.find_packages()
 
 setuptools.setup(
     name="naclib",
@@ -23,19 +18,16 @@ setuptools.setup(
     author_email="E.N.W.vanVeen@tudelft.nl",
     description="Non-Affine Corrections for microscope images",
     long_description=long_description,
- #   long_description_content_type="text/markdown",
-    url="https://github.com/qnano/photonpy",
+    url="https://gitlab.tudelft.nl/nynke-dekker-lab/public/naclib",
     packages=pk,
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: Microsoft :: Windows"
     ],
-	install_requires=[
-		'scipy', 
-		'numpy',
-		'matplotlib',
-        'pandas',
+    install_requires=[
+        'scipy',
+        'numpy',
         'zernike'
-	]
+    ]
 )
