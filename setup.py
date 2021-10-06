@@ -1,33 +1,26 @@
-import setuptools
+from distutils.core import setup
 
-long_description = """
-NAClib is a python library for applying a global alignment method
-for single-molecule fluorescence microscopy, using S/T Polynomial
-Decomposition (STPD). STPD employs linear combinations of Zernike
-polynomial gradients to decompose the distortion between two images,
-correcting both affine and higher-order components of the distortion
-in a single step, while requiring only minimal reference data.
-"""
-
-pk = setuptools.find_packages()
-
-setuptools.setup(
-    name="naclib",
-    version="1",
-    author="Edo van Veen, Kaley McCluskey",
-    author_email="E.N.W.vanVeen@tudelft.nl",
-    description="Non-Affine Corrections for microscope images",
-    long_description=long_description,
-    url="https://gitlab.tudelft.nl/nynke-dekker-lab/public/naclib",
-    packages=pk,
-    classifiers=[
-        "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: MIT License",
-        "Operating System :: Microsoft :: Windows"
-    ],
-    install_requires=[
+setup(
+  name = 'naclib',
+  packages = ['naclib'],
+  version = '0.1',
+  license='MIT',
+  description = 'Non-Affine Corrections on microscopy images using S/T Polynomial Decomposition',
+  author = 'Edo van Veen & Kaley McCluskey',
+  author_email = 'e.n.w.vanveen@tudelft.nl',
+  url = 'https://gitlab.tudelft.nl/nynke-dekker-lab/public/naclib',
+  keywords = ['colocalization', 'microscopy', 'distortion correction', 'STPD'],
+  install_requires=[
         'scipy',
         'numpy',
         'zernike'
-    ]
+      ],
+  classifiers=[
+    'Development Status :: 5 - Production/Stable',
+    'Intended Audience :: Scientists',
+    'Topic :: Software Development :: Build Tools',
+    'License :: OSI Approved :: MIT License',
+    'Programming Language :: Python :: 3',
+    'Programming Language :: Python :: 3.8',
+  ],
 )
