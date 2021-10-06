@@ -3,13 +3,13 @@ from distutils.core import setup
 setup(
   name = 'naclib',
   packages = ['naclib'],
-  version = '0.1',
+  version = '0.2',
   license='MIT',
   description = 'Non-Affine Corrections on microscopy images using S/T Polynomial Decomposition',
   author = 'Edo van Veen & Kaley McCluskey',
   author_email = 'e.n.w.vanveen@tudelft.nl',
   url = 'https://gitlab.tudelft.nl/nynke-dekker-lab/public/naclib',
-  download_url = 'https://gitlab.tudelft.nl/nynke-dekker-lab/public/naclib/-/archive/v0.1/naclib-v0.1.tar.gz',
+  download_url = 'https://gitlab.tudelft.nl/nynke-dekker-lab/public/naclib/-/archive/v0.2/naclib-v0.2.tar.gz',
   keywords = ['colocalization', 'microscopy', 'distortion correction', 'STPD'],
   install_requires=[
         'scipy',
