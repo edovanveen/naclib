@@ -18,7 +18,9 @@ your python path, you are ready to go.
 
 ### Installation with pip
 
-Coming soon!
+```
+pip install naclib
+```
 
 ## Usage
 
