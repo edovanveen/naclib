@@ -14,7 +14,8 @@ setup(
   install_requires=[
         'scipy',
         'numpy',
-        'zernike'
+        'zernike',
+        'h5py'
       ],
   classifiers=[
     'Development Status :: 5 - Production/Stable',
