@@ -166,5 +166,6 @@ df_locs_corrected.to_csv(output_locs)
 
 If you use this software, please cite:
 
-*`Distortion Correction for CoSMoS Microscopy Using S/T Polynomial Decomposition'*
-McCluskey et al., to be published (2021)
+McCluskey, Kaley A., et al. "Global correction of optical distortions in multicolor single-molecule microscopy using Zernike polynomial gradients." *Optics Express* 29.25 (2021): 42251-42264.
+
+[https://doi.org/10.1364/OE.445230](https://doi.org/10.1364/OE.445230)
