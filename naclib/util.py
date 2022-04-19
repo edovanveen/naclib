@@ -40,7 +40,7 @@ def make_pairs(locs0, locs1, mapping_0to1):
 def loc_to_unitcircle(locs_abs, fig_size, center=None, rescale=1):
     """Rescale locs_abs (shape (N, 2)) from pixel coordinates to unit circle coordinates, using the figure size fig_size
     (list of 2 ints). Optionally, a pixel location can be chosen manually to become the unit circle center,
-    and an additional rescale factor between 0 and 1 can be given."""
+    and an additional rescale factor can be given."""
 
     # Prepare.
     if center is None:
@@ -48,7 +48,7 @@ def loc_to_unitcircle(locs_abs, fig_size, center=None, rescale=1):
     dist_x = np.amax([center[0], fig_size[0] - center[0]])
     dist_y = np.amax([center[1], fig_size[1] - center[1]])
     scale_factor = 1 / np.linalg.norm([dist_x, dist_y])
-    extra_scale_factor = np.clip(rescale, 0, 1)
+    extra_scale_factor = rescale  # np.clip(rescale, 0, 1)
 
     # Rescale.
     locs = locs_abs - np.array(center).reshape((1, 2))
@@ -59,7 +59,7 @@ def loc_to_unitcircle(locs_abs, fig_size, center=None, rescale=1):
 def unitcircle_to_loc(locs, fig_size, center=None, rescale=1):
     """Rescale locs (shape (N, 2)) from unit circle coordinates to pixel coordinates, using the figure size fig_size
     (list of 2 ints). Optionally, a pixel location can be chosen manually for the unit circle center to transform to,
-    and an additional rescale factor between 0 and 1 can be given."""
+    and an additional rescale factor can be given."""
 
     # Prepare.
     if center is None:
@@ -67,7 +67,7 @@ def unitcircle_to_loc(locs, fig_size, center=None, rescale=1):
     dist_x = np.amax([center[0], fig_size[0] - center[0]])
     dist_y = np.amax([center[1], fig_size[1] - center[1]])
     scale_factor = 1 / np.linalg.norm([dist_x, dist_y])
-    extra_scale_factor = np.clip(rescale, 0, 1)
+    extra_scale_factor = rescale  # np.clip(rescale, 0, 1)
 
     locs = locs / (scale_factor * extra_scale_factor)
     locs_abs = locs + np.array(center).reshape((1, 2))
