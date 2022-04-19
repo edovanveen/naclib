@@ -26,6 +26,11 @@ pip install naclib
 
 ### Getting decomposition coefficients for a reference grid
 
+First, we need to find the STPD coefficients for a reference measurement.
+In this example, we use locations stored in `'example/locs_green.csv'` and
+`'example/locs_red.csv'` to determine the distortion field. The result
+is stored in a dataframe named `'example/STcoefficients.csv'`.
+
 ```python
 # Imports.
 import naclib.stpol
@@ -70,15 +75,20 @@ stpol = naclib.stpol.STPolynomials(j_max_S=j_max_S, j_max_T=j_max_T)
 a_S, a_T = stpol.get_decomposition(locs0, D)
 
 # Save resulting coefficients.
-df_coefs = pd.DataFrame(columns=['type', 'term', 'value'])
+dict_coefs = {'type': [], 'term': [], 'value': []}
 for term, value in a_S.items():
-    df_coefs = df_coefs.append({'type': 'S', 'term': term, 'value': value}, ignore_index=True)
+    dict_coefs['type'].append('S')
+    dict_coefs['term'].append(term)
+    dict_coefs['value'].append(value)
 for term, value in a_T.items():
-    df_coefs = df_coefs.append({'type': 'T', 'term': term, 'value': value}, ignore_index=True)
+    dict_coefs['type'].append('T')
+    dict_coefs['term'].append(term)
+    dict_coefs['value'].append(value)
+df_coefs = pd.DataFrame(dict_coefs)
 df_coefs.to_csv(output_coefficients)
 ```
 
-After that, you can visualize the result using:
+After that, we can visualize the result using:
 
 ```python
 import matplotlib.pyplot as plt
@@ -117,6 +127,10 @@ plt.close()
 ```
 
 ### Applying correction to a new measurement
+
+The resulting distortion correction can then be applied to a new measurement.
+In this example, the locations in `'example/locs_new.csv'` are corrected using
+the coefficients generated earlier.
 
 ```python
 # Imports.
