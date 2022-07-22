@@ -267,6 +267,10 @@ class STPolynomials:
             Dictionary with T-polynomial indices/coefficients as key/value pairs.
         """
 
+        # Check if any coordinates in locs are outside the unit circle.
+        if np.any([np.linalg.norm(loc) >= 1 for loc in locs]):
+            raise Exception("Cannot calculute decomposition for coordinates outside the unit circle.")
+
         self.cart.make_cart_grid(locs[:, 0], locs[:, 1])
         coefs_S = {j: 0 for j in self.Sj}
         coefs_T = {j: 0 for j in self.Tj}
@@ -321,6 +325,11 @@ class STPolynomials:
         a_Ttot : dict
             Dictionary with T-polynomial indices/coefficients as key/value pairs.
         """
+
+        # Check if any coordinates in locs are outside the unit circle.
+        if np.any([np.linalg.norm(loc) >= 1 for loc in locs]):
+            raise Exception("Cannot calculute decomposition for coordinates outside the unit circle.")
+
         # Prepare.
         D_temp = np.array(field_D)
         a_Sall = []
