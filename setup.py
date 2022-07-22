@@ -15,7 +15,7 @@ setup(
     author='Edo van Veen & Kaley McCluskey',
     author_email='e.n.w.vanveen@tudelft.nl',
     url='https://gitlab.tudelft.nl/nynke-dekker-lab/public/naclib',
-    download_url='https://gitlab.tudelft.nl/nynke-dekker-lab/public/dist/naclib-v1.0.0.tar.gz',
+    download_url='https://gitlab.tudelft.nl/nynke-dekker-lab/public/naclib/-/blob/master/dist/naclib-1.0.0.tar.gz',
     keywords=['colocalization', 'microscopy', 'distortion correction', 'STPD'],
     install_requires=[
         'scipy',
