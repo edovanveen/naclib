@@ -78,7 +78,7 @@ def gramschmidt(V):
 # Convert U to Z with equations 6-7
 # Checked results with https://doi.org/10.1364/OE.15.018014
 def get_Z_derivatives(j_max):
-    """Calculate Zernike polynomial derivatives."""
+    """Calculate Zernike polynomial derivatives, from https://doi.org/10.1364/OE.26.018878 eqs 44-51."""
     z = get_Rzern(j_max)
 
     dU_dx = dict()  # Key is (n, m) pair, value is dU_j/dx in terms of U coefficients starting at j=0
@@ -209,18 +209,18 @@ def get_ST_terms(j_max):
 # Class that ties it all together.
 class STPolynomials:
     """ST-polynomials class for calculating the ST-polynomial decomposition coefficients of a distortion map,
-    and for calculating a correction field from decomposition coefficents."""
+    and for calculating a correction field from decomposition coefficents.
+
+    Parameters
+    ----------
+    j_max_S : int
+        Maximum term for S-polynomials.
+    j_max_T : int
+        Maximum term for T-polynomials.
+    """
 
     def __init__(self, j_max_S, j_max_T):
-        """Initialize.
-
-        Parameters
-        ----------
-        j_max_S : int
-            Maximum term for S-polynomials.
-        j_max_T : int
-            Maximum term for T-polynomials.
-        """
+        """Initialize."""
 
         self.j_max_S = j_max_S
         self.j_max_T = j_max_T

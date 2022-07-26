@@ -24,6 +24,10 @@ pip install naclib
 
 ## Usage
 
+### Full documentation
+
+Full documentation is available at www.edovanveen.com/naclib.
+
 ### Getting decomposition coefficients for a reference grid
 
 First, we need to find the STPD coefficients for a reference measurement.

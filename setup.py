@@ -3,7 +3,7 @@ from distutils.core import setup
 setup(
     name='naclib',
     packages=['naclib'],
-    version='1.0.0',
+    version='1.0.1',
     license='MIT',
     description='Non-Affine Corrections on microscopy images using S/T Polynomial Decomposition',
     long_description='NAClib is a python library for applying a global alignment method ' + \
@@ -13,9 +13,9 @@ setup(
                      'correcting both affine and higher-order components of the distortion ' + \
                      'in a single step, while requiring only minimal reference data.',
     author='Edo van Veen & Kaley McCluskey',
-    author_email='e.n.w.vanveen@tudelft.nl',
-    url='https://gitlab.tudelft.nl/nynke-dekker-lab/public/naclib',
-    download_url='https://gitlab.tudelft.nl/nynke-dekker-lab/public/naclib/-/raw/master/dist/naclib-1.0.0.tar.gz',
+    author_email='edovanveen@gmail.nl',
+    url='https://github.com/edovanveen/naclib',
+    download_url='https://github.com/edovanveen/naclib/blob/master/dist/naclib-1.0.1.tar.gz',
     keywords=['colocalization', 'microscopy', 'distortion correction', 'STPD'],
     install_requires=[
         'scipy',
