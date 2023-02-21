@@ -7,7 +7,7 @@ in the NACLib code.
 .. toctree::
 
 .. autosummary::
-   :toctree: autosummary
+   :toctree: _autosummary
    :recursive:
 
    naclib.stpol
