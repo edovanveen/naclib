@@ -26,7 +26,7 @@ pip install naclib
 
 ### Full documentation
 
-Full documentation is available at www.edovanveen.com/naclib.
+Full documentation is available at https://edovanveen.github.io/naclib/.
 
 ### Getting decomposition coefficients for a reference grid
 
