@@ -1,0 +1,11 @@
+README.md
+setup.cfg
+setup.py
+naclib/__init__.py
+naclib/stpol.py
+naclib/util.py
+naclib.egg-info/PKG-INFO
+naclib.egg-info/SOURCES.txt
+naclib.egg-info/dependency_links.txt
+naclib.egg-info/requires.txt
+naclib.egg-info/top_level.txt

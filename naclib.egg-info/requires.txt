@@ -1,0 +1,4 @@
+scipy
+numpy
+zernike
+h5py
