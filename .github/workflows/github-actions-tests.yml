@@ -1,13 +1,15 @@
 name: NAClib Actions
 run-name: ${{ github.actor }} is testing out Sphinx-build on GitHub Actions 🚀
 on: [push]
+permissions:
+  contents: write
 jobs:
   Generate-Documentation:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up Python 3.8
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3
         with:
           python-version: 3.8
       - name: Install dependencies
