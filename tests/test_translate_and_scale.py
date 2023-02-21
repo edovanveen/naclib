@@ -14,8 +14,8 @@ def location_arrays_translate_and_scale():
 
 
 def coefficients_translate_and_scale():
-    a_S = {1: 0.0, 2: 0.01, 3: 0.01, 4: 0.01 * np.sqrt(2), 5: 0}
-    a_T = {4: 0}
+    a_S = {1: 0.0, 2: 0.01, 3: 0.01, 4: 0.01 * np.sqrt(2), 5: 0.0, 6: 0.0}
+    a_T = {4: 0.0}
     return a_S, a_T
 
 
@@ -30,7 +30,7 @@ def test_get_coefs_translate_and_scale():
     D[:, 1] = locs1[:, 1] - locs0[:, 1]
 
     # Get ST polynomial decomposition coefficients.
-    stpol = naclib.stpol.STPolynomials(j_max_S=5, j_max_T=5)
+    stpol = naclib.stpol.STPolynomials(j_max_S=6, j_max_T=6)
     a_S, a_T = stpol.get_decomposition(locs0, D)
 
     # Check result.
@@ -53,3 +53,6 @@ def test_apply_coefs_translate_and_scale():
     locs_corrected = locs0 + P
 
     assert(np.max(np.absolute(locs_corrected - locs1) < 1e-16))
+
+
+test_get_coefs_translate_and_scale()
