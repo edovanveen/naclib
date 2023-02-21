@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Python Module Index &mdash; NACLib 1.0.1 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>First run &mdash; NACLib 1.0.1 documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -16,9 +17,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
- 
-
-
+    <link rel="next" title="naclib.stpol" href="_autosummary/naclib.stpol.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -37,9 +37,9 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p><span class="caption-text">Documentation</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="firstrun.html">first run</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">first run</a></li>
 </ul>
 <p><span class="caption-text">API</span></p>
 <ul>
@@ -61,8 +61,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Python Module Index</li>
+      <li>First run</li>
       <li class="wy-breadcrumbs-aside">
+            <a href="_sources/firstrun.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -70,39 +71,28 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
+  <section id="first-run">
+<h1>First run<a class="headerlink" href="#first-run" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get decomposition components from calibration measurement.</span>
+<span class="n">stpol</span> <span class="o">=</span> <span class="n">naclib</span><span class="o">.</span><span class="n">stpol</span><span class="o">.</span><span class="n">STPolynomials</span><span class="p">(</span><span class="n">j_max_S</span><span class="o">=</span><span class="n">j_max_S</span><span class="p">,</span> <span class="n">j_max_T</span><span class="o">=</span><span class="n">j_max_T</span><span class="p">)</span>
+<span class="n">a_S</span><span class="p">,</span> <span class="n">a_T</span> <span class="o">=</span> <span class="n">stpol</span><span class="o">.</span><span class="n">get_decomposition</span><span class="p">(</span><span class="n">locs_calibration</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>
 
-   <h1>Python Module Index</h1>
+<span class="c1"># Get correction field.</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">stpol</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="n">locs</span><span class="p">,</span> <span class="n">a_S</span><span class="p">,</span> <span class="n">a_T</span><span class="p">)</span>
 
-   <div class="modindex-jumpbox">
-   <a href="#cap-n"><strong>n</strong></a>
-   </div>
-
-   <table class="indextable modindextable">
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-n"><td></td><td>
-       <strong>n</strong></td><td></td></tr>
-     <tr>
-       <td><img src="_static/minus.png" class="toggler"
-              id="toggle-1" style="display: none" alt="-" /></td>
-       <td>
-       <code class="xref">naclib</code></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="_autosummary/naclib.stpol.html#module-naclib.stpol"><code class="xref">naclib.stpol</code></a></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="_autosummary/naclib.util.html#module-naclib.util"><code class="xref">naclib.util</code></a></td><td>
-       <em></em></td></tr>
-   </table>
+<span class="c1"># Correct spot locations.</span>
+<span class="n">locs_corrected</span> <span class="o">=</span> <span class="n">locs</span> <span class="o">+</span> <span class="n">P</span>
+</pre></div>
+</div>
+</section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="_autosummary/naclib.stpol.html" class="btn btn-neutral float-right" title="naclib.stpol" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
