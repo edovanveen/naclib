@@ -46,7 +46,7 @@ def test_apply_coefs_translate_and_scale():
     a_S, a_T = coefficients_translate_and_scale()
 
     # Get correction field.
-    stpol = naclib.stpol.STPolynomials(j_max_S=5, j_max_T=5)
+    stpol = naclib.stpol.STPolynomials(j_max_S=6, j_max_T=6)
     P = stpol.get_field(locs0, a_S, a_T)
 
     # Correct spot locations, scale back from unit circle to original scale, and save.
