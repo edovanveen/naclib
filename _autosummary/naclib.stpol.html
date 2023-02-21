@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>naclib.stpol &mdash; NACLib 1.0.1 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="naclib.util" href="naclib.util.html" />
+    <link rel="prev" title="Welcome to the NACLib documentation" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> NACLib
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">naclib.stpol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="naclib.util.html">naclib.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">NACLib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>naclib.stpol</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_autosummary/naclib.stpol.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-naclib.stpol">
+<span id="naclib-stpol"></span><h1>naclib.stpol<a class="headerlink" href="#module-naclib.stpol" title="Permalink to this headline">¶</a></h1>
+<p>Main ST-polynomial decomposition functionality.</p>
+<p>By Edo van Veen &#64; Nynke Dekker Lab, TU Delft (2021)</p>
+<dl class="py function">
+<dt id="naclib.stpol.Nnmu">
+<code class="sig-prename descclassname">naclib.stpol.</code><code class="sig-name descname">Nnmu</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">mu</span></em><span class="sig-paren">)</span><a class="headerlink" href="#naclib.stpol.Nnmu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate N_{n, mu}.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="naclib.stpol.STPolynomials">
+<em class="property">class </em><code class="sig-prename descclassname">naclib.stpol.</code><code class="sig-name descname">STPolynomials</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">j_max_S</span></em>, <em class="sig-param"><span class="n">j_max_T</span></em><span class="sig-paren">)</span><a class="headerlink" href="#naclib.stpol.STPolynomials" title="Permalink to this definition">¶</a></dt>
+<dd><p>ST-polynomials class for calculating the ST-polynomial decomposition coefficients of a distortion map,
+and for calculating a correction field from decomposition coefficents.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>j_max_S</strong> (<em>int</em>) – Maximum term for S-polynomials.</p></li>
+<li><p><strong>j_max_T</strong> (<em>int</em>) – Maximum term for T-polynomials.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="naclib.stpol.STPolynomials.get_decomposition">
+<code class="sig-name descname">get_decomposition</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">locs</span></em>, <em class="sig-param"><span class="n">field_D</span></em>, <em class="sig-param"><span class="n">mean_error_convergence</span><span class="o">=</span><span class="default_value">1e-06</span></em>, <em class="sig-param"><span class="n">mean_error_divergence</span><span class="o">=</span><span class="default_value">0.01</span></em>, <em class="sig-param"><span class="n">max_iter</span><span class="o">=</span><span class="default_value">10000</span></em>, <em class="sig-param"><span class="n">return_error</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">verbose</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#naclib.stpol.STPolynomials.get_decomposition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the optimal decomposition coefficients for a distortion map with N points by using the iterative method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>locs</strong> (<em>np.array of floats</em>) – x and y coordinates of the distortion map coordinates, shape (N, 2).</p></li>
+<li><p><strong>field_D</strong> (<em>np.array of floats</em>) – x and y components of the distortion vectors at the coordinates given by locs, shape (N, 2).</p></li>
+<li><p><strong>mean_error_convergence</strong> (<em>float</em><em> (</em><em>optional</em><em>)</em>) – The iteration is considered converged when the mean error reaches this value. Default: 1e-6.</p></li>
+<li><p><strong>mean_error_divergence</strong> (<em>float</em><em> (</em><em>optional</em><em>)</em>) – The iteration is considered diverged when the mean error reaches this value. Default: 1e-2.</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em> (</em><em>optional</em><em>)</em>) – Maximum number of iterations. Default: 10000.</p></li>
+<li><p><strong>return_error</strong> (<em>bool</em><em> (</em><em>optional</em><em>)</em>) – If True, the error is given as a third return value. Default: False.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em> (</em><em>optional</em><em>)</em>) – If True, print message on convergence or divergence. Default: True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>a_Stot</strong> (<em>dict</em>) – Dictionary with S-polynomial indices/coefficients as key/value pairs.</p></li>
+<li><p><strong>a_Ttot</strong> (<em>dict</em>) – Dictionary with T-polynomial indices/coefficients as key/value pairs.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="naclib.stpol.STPolynomials.get_decomposition_gramschmidt">
+<code class="sig-name descname">get_decomposition_gramschmidt</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">locs</span></em>, <em class="sig-param"><span class="n">field_D</span></em><span class="sig-paren">)</span><a class="headerlink" href="#naclib.stpol.STPolynomials.get_decomposition_gramschmidt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the decomposition coefficients for a distortion map with N points, by using Gram-Schmidt
+orthonormalization to orthonormalize the ST polynomials on the finite grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>locs</strong> (<em>np.array of floats</em>) – x and y coordinates of the distortion map coordinates, shape (N, 2).</p></li>
+<li><p><strong>field_D</strong> (<em>np.array of floats</em>) – x and y components of the distortion vectors at the coordinates given by locs, shape (N, 2).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>coefs_S</strong> (<em>dict</em>) – Dictionary with S-polynomial indices/coefficients as key/value pairs.</p></li>
+<li><p><strong>coefs_T</strong> (<em>dict</em>) – Dictionary with T-polynomial indices/coefficients as key/value pairs.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="naclib.stpol.STPolynomials.get_decomposition_noniterative">
+<code class="sig-name descname">get_decomposition_noniterative</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">locs</span></em>, <em class="sig-param"><span class="n">field_D</span></em><span class="sig-paren">)</span><a class="headerlink" href="#naclib.stpol.STPolynomials.get_decomposition_noniterative" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the decomposition coefficients for a distortion map with N points without using the iterative method
+and without Gram-Schmidt orthonormalization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>locs</strong> (<em>np.array of floats</em>) – x and y coordinates of the distortion map coordinates, shape (N, 2).</p></li>
+<li><p><strong>field_D</strong> (<em>np.array of floats</em>) – x and y components of the distortion vectors at the coordinates given by locs, shape (N, 2).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>coefs_S</strong> (<em>dict</em>) – Dictionary with S-polynomial indices/coefficients as key/value pairs.</p></li>
+<li><p><strong>coefs_T</strong> (<em>dict</em>) – Dictionary with T-polynomial indices/coefficients as key/value pairs.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="naclib.stpol.STPolynomials.get_field">
+<code class="sig-name descname">get_field</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">locs</span></em>, <em class="sig-param"><span class="n">coefs_S</span></em>, <em class="sig-param"><span class="n">coefs_T</span></em><span class="sig-paren">)</span><a class="headerlink" href="#naclib.stpol.STPolynomials.get_field" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the correction field from ST-polynomial decomposition coefficients.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>locs</strong> (<em>np.array of floats</em>) – x and y coordinates of input coordinates, shape (N, 2).</p></li>
+<li><p><strong>coefs_S</strong> (<em>dict</em>) – Dictionary with S-polynomial indices/coefficients as key/value pairs.</p></li>
+<li><p><strong>coefs_T</strong> (<em>dict</em>) – Dictionary with T-polynomial indices/coefficients as key/value pairs.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>field_ST</strong> – x and y components of the correction vectors at the coordinates given by locs, shape (N, 2).</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>np.array of floats</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="naclib.stpol.get_Rzern">
+<code class="sig-prename descclassname">naclib.stpol.</code><code class="sig-name descname">get_Rzern</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">j_max</span></em><span class="sig-paren">)</span><a class="headerlink" href="#naclib.stpol.get_Rzern" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an Rzern object from the zernike library.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="naclib.stpol.get_ST_terms">
+<code class="sig-prename descclassname">naclib.stpol.</code><code class="sig-name descname">get_ST_terms</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">j_max</span></em><span class="sig-paren">)</span><a class="headerlink" href="#naclib.stpol.get_ST_terms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all S/T terms for a value of j_max.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="naclib.stpol.get_Z_derivatives">
+<code class="sig-prename descclassname">naclib.stpol.</code><code class="sig-name descname">get_Z_derivatives</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">j_max</span></em><span class="sig-paren">)</span><a class="headerlink" href="#naclib.stpol.get_Z_derivatives" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate Zernike polynomial derivatives, from <a class="reference external" href="https://doi.org/10.1364/OE.26.018878">https://doi.org/10.1364/OE.26.018878</a> eqs 44-51.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="naclib.stpol.get_phi_derivatives">
+<code class="sig-prename descclassname">naclib.stpol.</code><code class="sig-name descname">get_phi_derivatives</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">j_max</span></em><span class="sig-paren">)</span><a class="headerlink" href="#naclib.stpol.get_phi_derivatives" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate phi vector field derivatives.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="naclib.stpol.gramschmidt">
+<code class="sig-prename descclassname">naclib.stpol.</code><code class="sig-name descname">gramschmidt</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">V</span></em><span class="sig-paren">)</span><a class="headerlink" href="#naclib.stpol.gramschmidt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform field basis V (shape (n_basis, n_locs, 2)) into orthonormal basis U; also return transformation
+matrix M (shape (n_basis, n_basis)).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="naclib.stpol.inprod">
+<code class="sig-prename descclassname">naclib.stpol.</code><code class="sig-name descname">inprod</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">A</span></em>, <em class="sig-param"><span class="n">B</span></em><span class="sig-paren">)</span><a class="headerlink" href="#naclib.stpol.inprod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inner product between fields A (shape (n_locs, 2)) and B (shape (n_locs, 2)).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="naclib.stpol.nm2nmu">
+<code class="sig-prename descclassname">naclib.stpol.</code><code class="sig-name descname">nm2nmu</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">m</span></em><span class="sig-paren">)</span><a class="headerlink" href="#naclib.stpol.nm2nmu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert an (n, m) pair to an (n, mu) pair.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="naclib.stpol.nmu2nm">
+<code class="sig-prename descclassname">naclib.stpol.</code><code class="sig-name descname">nmu2nm</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">mu</span></em><span class="sig-paren">)</span><a class="headerlink" href="#naclib.stpol.nmu2nm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert an (n, mu) pair to an (n, m) pair.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to the NACLib documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="naclib.util.html" class="btn btn-neutral float-right" title="naclib.util" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Edo van Veen &amp; Kaley McCluskey.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>naclib.util &mdash; NACLib 1.0.1 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="naclib.stpol" href="naclib.stpol.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> NACLib
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="naclib.stpol.html">naclib.stpol</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">naclib.util</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">NACLib</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>naclib.util</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/_autosummary/naclib.util.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-naclib.util">
+<span id="naclib-util"></span><h1>naclib.util<a class="headerlink" href="#module-naclib.util" title="Permalink to this headline">¶</a></h1>
+<p>Some useful functions for ST-polynomial decomposition.</p>
+<p>By Edo van Veen &#64; Nynke Dekker Lab, TU Delft (2021)</p>
+<dl class="py function">
+<dt id="naclib.util.find_neighbours">
+<code class="sig-prename descclassname">naclib.util.</code><code class="sig-name descname">find_neighbours</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">locs0</span></em>, <em class="sig-param"><span class="n">locs1</span></em>, <em class="sig-param"><span class="n">threshold</span></em><span class="sig-paren">)</span><a class="headerlink" href="#naclib.util.find_neighbours" title="Permalink to this definition">¶</a></dt>
+<dd><p>For each coordinate in locs0 (shape (N, 2)), find the nearest coordinate in locs1 (shape (M, 2)),
+within some threshold distance. Returns a np.array, with mapping_0to1[i] = j connecting a spot index i from
+locs0 to a spot index j from locs1. If no neighbor is found, j == -1.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="naclib.util.loc_to_unitcircle">
+<code class="sig-prename descclassname">naclib.util.</code><code class="sig-name descname">loc_to_unitcircle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">locs_abs</span></em>, <em class="sig-param"><span class="n">fig_size</span></em>, <em class="sig-param"><span class="n">center</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rescale</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#naclib.util.loc_to_unitcircle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rescale locs_abs (shape (N, 2)) from pixel coordinates to unit circle coordinates, using the figure size fig_size
+(list of 2 ints). Optionally, a pixel location can be chosen manually to become the unit circle center,
+and an additional rescale factor can be given.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="naclib.util.make_pairs">
+<code class="sig-prename descclassname">naclib.util.</code><code class="sig-name descname">make_pairs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">locs0</span></em>, <em class="sig-param"><span class="n">locs1</span></em>, <em class="sig-param"><span class="n">mapping_0to1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#naclib.util.make_pairs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Using the mapping_0to1 map from find_neighbours(), make two ordered lists of spots. At each index i,
+locs0_pairs[i] and locs1_pairs[i] are neighbours.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="naclib.util.unitcircle_to_loc">
+<code class="sig-prename descclassname">naclib.util.</code><code class="sig-name descname">unitcircle_to_loc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">locs</span></em>, <em class="sig-param"><span class="n">fig_size</span></em>, <em class="sig-param"><span class="n">center</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">rescale</span><span class="o">=</span><span class="default_value">1</span></em><span class="sig-paren">)</span><a class="headerlink" href="#naclib.util.unitcircle_to_loc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rescale locs (shape (N, 2)) from unit circle coordinates to pixel coordinates, using the figure size fig_size
+(list of 2 ints). Optionally, a pixel location can be chosen manually for the unit circle center to transform to,
+and an additional rescale factor can be given.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="naclib.stpol.html" class="btn btn-neutral float-left" title="naclib.stpol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Edo van Veen &amp; Kaley McCluskey.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
