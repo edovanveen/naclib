@@ -60,6 +60,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#naclib.stpol.get_Rzern"><code class="docutils literal notranslate"><span class="pre">get_Rzern()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#naclib.stpol.get_ST_terms"><code class="docutils literal notranslate"><span class="pre">get_ST_terms()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#naclib.stpol.get_Z_derivatives"><code class="docutils literal notranslate"><span class="pre">get_Z_derivatives()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#naclib.stpol.get_highest_converging_j_max"><code class="docutils literal notranslate"><span class="pre">get_highest_converging_j_max()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#naclib.stpol.get_phi_derivatives"><code class="docutils literal notranslate"><span class="pre">get_phi_derivatives()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#naclib.stpol.gramschmidt"><code class="docutils literal notranslate"><span class="pre">gramschmidt()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#naclib.stpol.inprod"><code class="docutils literal notranslate"><span class="pre">inprod()</span></code></a></li>
@@ -226,6 +227,12 @@ and without Gram-Schmidt orthonormalization.</p>
 <dt class="sig sig-object py" id="naclib.stpol.get_Z_derivatives">
 <span class="sig-prename descclassname"><span class="pre">naclib.stpol.</span></span><span class="sig-name descname"><span class="pre">get_Z_derivatives</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">j_max</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#naclib.stpol.get_Z_derivatives" title="Permalink to this definition"></a></dt>
 <dd><p>Calculate Zernike polynomial derivatives, from <a class="reference external" href="https://doi.org/10.1364/OE.26.018878">https://doi.org/10.1364/OE.26.018878</a> eqs 44-51.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="naclib.stpol.get_highest_converging_j_max">
+<span class="sig-prename descclassname"><span class="pre">naclib.stpol.</span></span><span class="sig-name descname"><span class="pre">get_highest_converging_j_max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">locs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">div_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#naclib.stpol.get_highest_converging_j_max" title="Permalink to this definition"></a></dt>
+<dd><p>Get the highest value of j_max (up to 45) for which the ST polynomial decomposition converges.</p>
 </dd></dl>
 
 <dl class="py function">
