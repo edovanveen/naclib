@@ -73,6 +73,19 @@ def gramschmidt(V):
     return U, M
 
 
+def get_highest_converging_j_max(locs, D, div_threshold=1e-2):
+    """Get the highest value of j_max (up to 45) for which the ST polynomial decomposition converges."""
+    j_max_best = 0
+    for j_max in [3, 6, 10, 15, 21, 28, 36, 45]:
+        stpol = STPolynomials(j_max_S=j_max, j_max_T=j_max)
+        a_S, a_T, MSE = stpol.get_decomposition(locs, D,
+                                                mean_error_divergence=div_threshold,
+                                                return_error=True, verbose=False)
+        if MSE[-1] < div_threshold:
+            j_max_best = j_max
+    return j_max_best
+
+
 # Calculate derivatives from https://doi.org/10.1364/OE.26.018878
 # Use equations 44-51
 # Convert U to Z with equations 6-7

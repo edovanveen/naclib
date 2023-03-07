@@ -1,5 +1,5 @@
 name: NAClib Actions
-run-name: ${{ github.actor }} is testing out sphinx-build and pytest on GitHub Actions 🚀
+run-name: ${{ github.actor }} is running sphinx-build and pytest on GitHub Actions 🚀
 on: [push]
 permissions:
   contents: write
