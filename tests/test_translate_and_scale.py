@@ -53,6 +53,3 @@ def test_apply_coefs_translate_and_scale():
     locs_corrected = locs0 + P
 
     assert(np.max(np.absolute(locs_corrected - locs1) < 1e-16))
-
-
-test_get_coefs_translate_and_scale()
