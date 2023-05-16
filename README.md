@@ -30,7 +30,7 @@ pip install naclib
 
 The calibration data needs to be:
 - of size `(n, 2)`, with `n` the number of spots
-- spot-paired
+- spot-paired, so `locs0_calibration[i, :]` corresponds to `locs1_calibration[i, :]` for each `i`
 - rescaled to within the unit circle
 
 ```python 
@@ -42,15 +42,29 @@ There are some utility functions available to help you rescale
 data to the unit circle, and find spot pairs in the calibration dataset:
 
 ```python
+import naclib.util
+
 # Find the nearest neighbours; rescale to unit circle.
 fig_size = [512, 512]  # image size in pixels
 threshold = 5  # threshold in pixels for nearest neighbor detection
-mapping = naclib.util.find_neighbours(locs0_calibration_raw, 
-                                      locs1_calibration_raw, 
+
+# Find nearest neighbours within threshold distance.
+mapping = naclib.util.find_neighbours(locs0_calibration_raw,
+                                      locs1_calibration_raw,
                                       threshold=threshold)
+
+# Make spot pairs.
 locs0_pairs, locs1_pairs = naclib.util.make_pairs(locs0_raw, locs1_raw, mapping)
+
+# Rescale to unit circle.
 locs0_calibration, scale = naclib.util.loc_to_unitcircle(locs0_pairs, fig_size)
 locs1_calibration, scale = naclib.util.loc_to_unitcircle(locs1_pairs, fig_size)
+```
+
+Location arrays can be transformed back to their original coordinate system using:
+
+```python
+locs0_orig = naclib.util.unitcircle_to_loc(locs0_calibration, fig_size)
 ```
 
 The measurement data needs to be:
@@ -70,9 +84,7 @@ import naclib
 import numpy as np
 
 # Get distortion field.
-distortion_field = np.zeros(locs0_calibration.shape)
-distortion_field[:, 0] = locs1_calibration[:, 0] - locs0_calibration[:, 0]
-distortion_field[:, 1] = locs1_calibration[:, 1] - locs0_calibration[:, 1]
+distortion_field = locs1_calibration - locs0_calibration
 
 # Get ST polynomial decomposition coefficients.
 model = naclib.DistortionCorrection()
