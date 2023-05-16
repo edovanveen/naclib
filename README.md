@@ -65,7 +65,7 @@ locs1_measurement  # Measurement data for channel 1
 ```
 
 The easiest way to run the calibration and correction is to use `naclib.DistortionCorrection`
-and its SciPy-style fit/predict methods:
+and its sklearn-style fit/predict methods:
 
 ```python
 import naclib
