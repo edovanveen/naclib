@@ -73,15 +73,36 @@ def gramschmidt(V):
     return U, M
 
 
-def get_highest_converging_j_max(locs, D, div_threshold=1e-2):
-    """Get the highest value of j_max (up to 45) for which the ST polynomial decomposition converges."""
+def get_highest_converging_j_max(locs, D, mean_error_convergence=1e-6, mean_error_divergence=1e-2, max_iter=10000):
+    """Get the highest value of j_max (up to 45) for which the ST polynomial decomposition converges.
+
+    Parameters
+    ----------
+    locs : np.array of floats
+        x and y coordinates of the distortion map coordinates, shape (N, 2).
+    D : np.array of floats
+        x and y components of the distortion vectors at the coordinates given by locs, shape (N, 2).
+    mean_error_convergence : float (optional)
+        The iteration is considered converged when the mean error reaches this value. Default: 1e-6.
+    mean_error_divergence : float (optional)
+        The iteration is considered diverged when the mean error reaches this value. Default: 1e-2.
+    max_iter : int (optional)
+        Maximum number of iterations. Default: 10000.
+
+    Returns
+    -------
+    j_max_best : int
+        Highest converging maximum term for S- and T-polynomials.
+    """
     j_max_best = 0
     for j_max in [3, 6, 10, 15, 21, 28, 36, 45]:
         stpol = STPolynomials(j_max_S=j_max, j_max_T=j_max)
         a_S, a_T, MSE = stpol.get_decomposition(locs, D,
-                                                mean_error_divergence=div_threshold,
+                                                max_iter=max_iter,
+                                                mean_error_convergence=mean_error_convergence,
+                                                mean_error_divergence=mean_error_divergence,
                                                 return_error=True, verbose=False)
-        if MSE[-1] < div_threshold:
+        if MSE[-1] < mean_error_divergence:
             j_max_best = j_max
     return j_max_best
 
