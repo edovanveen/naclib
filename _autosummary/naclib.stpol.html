@@ -230,8 +230,25 @@ and without Gram-Schmidt orthonormalization.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="naclib.stpol.get_highest_converging_j_max">
-<span class="sig-prename descclassname"><span class="pre">naclib.stpol.</span></span><span class="sig-name descname"><span class="pre">get_highest_converging_j_max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">locs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">div_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#naclib.stpol.get_highest_converging_j_max" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">naclib.stpol.</span></span><span class="sig-name descname"><span class="pre">get_highest_converging_j_max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">locs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">D</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean_error_convergence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean_error_divergence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_iter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#naclib.stpol.get_highest_converging_j_max" title="Permalink to this definition"></a></dt>
 <dd><p>Get the highest value of j_max (up to 45) for which the ST polynomial decomposition converges.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>locs</strong> (<em>np.array</em><em> of </em><em>floats</em>) – x and y coordinates of the distortion map coordinates, shape (N, 2).</p></li>
+<li><p><strong>D</strong> (<em>np.array</em><em> of </em><em>floats</em>) – x and y components of the distortion vectors at the coordinates given by locs, shape (N, 2).</p></li>
+<li><p><strong>mean_error_convergence</strong> (<em>float</em><em> (</em><em>optional</em><em>)</em>) – The iteration is considered converged when the mean error reaches this value. Default: 1e-6.</p></li>
+<li><p><strong>mean_error_divergence</strong> (<em>float</em><em> (</em><em>optional</em><em>)</em>) – The iteration is considered diverged when the mean error reaches this value. Default: 1e-2.</p></li>
+<li><p><strong>max_iter</strong> (<em>int</em><em> (</em><em>optional</em><em>)</em>) – Maximum number of iterations. Default: 10000.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>j_max_best</strong> – Highest converging maximum term for S- and T-polynomials.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
