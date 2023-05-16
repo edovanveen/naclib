@@ -77,15 +77,53 @@
              
   <section id="first-run">
 <h1>First run<a class="headerlink" href="#first-run" title="Permalink to this heading"></a></h1>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get decomposition components from calibration measurement.</span>
-<span class="n">stpol</span> <span class="o">=</span> <span class="n">naclib</span><span class="o">.</span><span class="n">stpol</span><span class="o">.</span><span class="n">STPolynomials</span><span class="p">(</span><span class="n">j_max_S</span><span class="o">=</span><span class="n">j_max_S</span><span class="p">,</span> <span class="n">j_max_T</span><span class="o">=</span><span class="n">j_max_T</span><span class="p">)</span>
-<span class="n">a_S</span><span class="p">,</span> <span class="n">a_T</span> <span class="o">=</span> <span class="n">stpol</span><span class="o">.</span><span class="n">get_decomposition</span><span class="p">(</span><span class="n">locs_calibration</span><span class="p">,</span> <span class="n">D</span><span class="p">)</span>
+<p>The calibration data needs to be:
+- of size <cite>(n, 2)</cite>, with <cite>n</cite> the number of spots
+- spot-paired
+- rescaled to within the unit circle</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">locs0_calibration</span>  <span class="c1"># Calibration data for channel 0</span>
+<span class="n">locs1_calibration</span>  <span class="c1"># Calibration data for channel 1</span>
+</pre></div>
+</div>
+<p>There are some utility functions available to help you rescale
+data to the unit circle, and find spot pairs in the calibration dataset:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find the nearest neighbours; rescale to unit circle.</span>
+<span class="n">fig_size</span> <span class="o">=</span> <span class="p">[</span><span class="mi">512</span><span class="p">,</span> <span class="mi">512</span><span class="p">]</span>  <span class="c1"># image size in pixels</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># threshold in pixels for nearest neighbor detection</span>
+<span class="n">mapping</span> <span class="o">=</span> <span class="n">naclib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">find_neighbours</span><span class="p">(</span><span class="n">locs0_calibration_raw</span><span class="p">,</span>
+                                      <span class="n">locs1_calibration_raw</span><span class="p">,</span>
+                                      <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">)</span>
+<span class="n">locs0_pairs</span><span class="p">,</span> <span class="n">locs1_pairs</span> <span class="o">=</span> <span class="n">naclib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">make_pairs</span><span class="p">(</span><span class="n">locs0_raw</span><span class="p">,</span> <span class="n">locs1_raw</span><span class="p">,</span> <span class="n">mapping</span><span class="p">)</span>
+<span class="n">locs0_calibration</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">naclib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">loc_to_unitcircle</span><span class="p">(</span><span class="n">locs0_pairs</span><span class="p">,</span> <span class="n">fig_size</span><span class="p">)</span>
+<span class="n">locs1_calibration</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">naclib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">loc_to_unitcircle</span><span class="p">(</span><span class="n">locs1_pairs</span><span class="p">,</span> <span class="n">fig_size</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The measurement data needs to be:
+- of size <cite>(n0, 2)</cite>, <cite>(n1, 2)</cite> with <cite>n0, n1</cite> the number of spots in channels 0 and 1
+- rescaled to within the unit circle</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">locs0_measurement</span>  <span class="c1"># Measurement data for channel 0</span>
+<span class="n">locs1_measurement</span>  <span class="c1"># Measurement data for channel 1</span>
+</pre></div>
+</div>
+<p>The easiest way to run the calibration and correction is to use <cite>naclib.DistortionCorrection</cite>
+and its SciPy-style fit/predict methods:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">naclib</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Get distortion field.</span>
+<span class="n">distortion_field</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">locs0_calibration</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">distortion_field</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">locs1_calibration</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">locs0_calibration</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">distortion_field</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">locs1_calibration</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">locs0_calibration</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Get ST polynomial decomposition coefficients.</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">naclib</span><span class="o">.</span><span class="n">DistortionCorrection</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">locs0_calibration</span><span class="p">,</span> <span class="n">distortion_field</span><span class="p">)</span>
 
 <span class="c1"># Get correction field.</span>
-<span class="n">P</span> <span class="o">=</span> <span class="n">stpol</span><span class="o">.</span><span class="n">get_field</span><span class="p">(</span><span class="n">locs</span><span class="p">,</span> <span class="n">a_S</span><span class="p">,</span> <span class="n">a_T</span><span class="p">)</span>
+<span class="n">correction_field</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">locs1_measurement</span><span class="p">)</span>
 
-<span class="c1"># Correct spot locations.</span>
-<span class="n">locs_corrected</span> <span class="o">=</span> <span class="n">locs</span> <span class="o">+</span> <span class="n">P</span>
+<span class="c1"># Apply correction.</span>
+<span class="n">locs1_measurement_corrected</span> <span class="o">=</span> <span class="n">locs1_measurement</span> <span class="o">+</span> <span class="n">correction_field</span>
 </pre></div>
 </div>
 </section>
