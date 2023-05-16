@@ -1,5 +1,5 @@
 """
-Main ST-polynomial decomposition functionality.
+Fit/predict interface for ST-polynomial decomposition distortion correction.
 
 By Edo van Veen @ Nynke Dekker Lab, TU Delft (2021)
 """
@@ -24,12 +24,12 @@ class DistortionCorrection:
         self.conv_threshold = conv_threshold
         self.div_threshold = div_threshold
         self.j_max = 0
-        self.stpol = naclib.stpol.STPolynomials(j_max_S=0, j_max_T=0)
+        self.stpol = None
         self.a_S = {}
         self.a_T = {}
 
     def fit(self, locations, distortions):
-        """Fit...
+        """Fit distortion correction model using a distortion field in the unit circle.
 
         Parameters
         ----------
@@ -53,7 +53,7 @@ class DistortionCorrection:
                                                           verbose=False)
 
     def predict(self, locations):
-        """Predict...
+        """Generate a correction field at input locations.
 
         Parameters
         ----------
@@ -65,4 +65,6 @@ class DistortionCorrection:
         np.array of floats
             x and y components of the distortion correction vectors at the coordinates given by locations, shape (N, 2).
         """
+        if self.stpol is None:
+            return RuntimeError("Cannot run prediction before fitting.")
         return self.stpol.get_field(locations, self.a_S, self.a_T)
