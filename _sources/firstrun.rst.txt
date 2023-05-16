@@ -2,7 +2,8 @@ First run
 =========
 
 The calibration data needs to be:
-- of size `(n, 2)`, with `n` the number of spots
+
+- of size ``(n, 2)``, with ``n`` the number of spots
 - spot-paired
 - rescaled to within the unit circle
 
@@ -27,7 +28,8 @@ data to the unit circle, and find spot pairs in the calibration dataset:
     locs1_calibration, scale = naclib.util.loc_to_unitcircle(locs1_pairs, fig_size)
 
 The measurement data needs to be:
-- of size `(n0, 2)`, `(n1, 2)` with `n0, n1` the number of spots in channels 0 and 1
+
+- of size ``(n0, 2)``, ``(n1, 2)`` with ``n0, n1`` the number of spots in channels 0 and 1
 - rescaled to within the unit circle
 
 .. code-block:: python
@@ -35,8 +37,8 @@ The measurement data needs to be:
     locs0_measurement  # Measurement data for channel 0
     locs1_measurement  # Measurement data for channel 1
 
-The easiest way to run the calibration and correction is to use `naclib.DistortionCorrection`
-and its SciPy-style fit/predict methods:
+The easiest way to run the calibration and correction is to use ``naclib.DistortionCorrection``
+and its sklearn-style fit/predict methods:
 
 .. code-block:: python
 

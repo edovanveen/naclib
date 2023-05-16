@@ -77,10 +77,12 @@
              
   <section id="first-run">
 <h1>First run<a class="headerlink" href="#first-run" title="Permalink to this heading"></a></h1>
-<p>The calibration data needs to be:
-- of size <cite>(n, 2)</cite>, with <cite>n</cite> the number of spots
-- spot-paired
-- rescaled to within the unit circle</p>
+<p>The calibration data needs to be:</p>
+<ul class="simple">
+<li><p>of size <code class="docutils literal notranslate"><span class="pre">(n,</span> <span class="pre">2)</span></code>, with <code class="docutils literal notranslate"><span class="pre">n</span></code> the number of spots</p></li>
+<li><p>spot-paired</p></li>
+<li><p>rescaled to within the unit circle</p></li>
+</ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">locs0_calibration</span>  <span class="c1"># Calibration data for channel 0</span>
 <span class="n">locs1_calibration</span>  <span class="c1"># Calibration data for channel 1</span>
 </pre></div>
@@ -98,15 +100,17 @@ data to the unit circle, and find spot pairs in the calibration dataset:</p>
 <span class="n">locs1_calibration</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">naclib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">loc_to_unitcircle</span><span class="p">(</span><span class="n">locs1_pairs</span><span class="p">,</span> <span class="n">fig_size</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The measurement data needs to be:
-- of size <cite>(n0, 2)</cite>, <cite>(n1, 2)</cite> with <cite>n0, n1</cite> the number of spots in channels 0 and 1
-- rescaled to within the unit circle</p>
+<p>The measurement data needs to be:</p>
+<ul class="simple">
+<li><p>of size <code class="docutils literal notranslate"><span class="pre">(n0,</span> <span class="pre">2)</span></code>, <code class="docutils literal notranslate"><span class="pre">(n1,</span> <span class="pre">2)</span></code> with <code class="docutils literal notranslate"><span class="pre">n0,</span> <span class="pre">n1</span></code> the number of spots in channels 0 and 1</p></li>
+<li><p>rescaled to within the unit circle</p></li>
+</ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">locs0_measurement</span>  <span class="c1"># Measurement data for channel 0</span>
 <span class="n">locs1_measurement</span>  <span class="c1"># Measurement data for channel 1</span>
 </pre></div>
 </div>
-<p>The easiest way to run the calibration and correction is to use <cite>naclib.DistortionCorrection</cite>
-and its SciPy-style fit/predict methods:</p>
+<p>The easiest way to run the calibration and correction is to use <code class="docutils literal notranslate"><span class="pre">naclib.DistortionCorrection</span></code>
+and its sklearn-style fit/predict methods:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">naclib</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
