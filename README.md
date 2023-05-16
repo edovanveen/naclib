@@ -110,5 +110,5 @@ sphinx-build -b html docs/source docs/build
 - Change version in `docs/source/conf.py`
 - Run `python setup.py sdist`
 - Git push
-- Run `twine upload --repository-url https://pypi.org/project/naclib/ dist\naclib-<newversion>.tar.gz
+- Run `twine upload --repository-url https://upload.pypi.org/legacy/ dist/*`
 `
