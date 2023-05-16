@@ -103,3 +103,12 @@ McCluskey, Kaley A., et al. "Global correction of optical distortions in multico
 ```
 sphinx-build -b html docs/source docs/build
 ```
+
+## Distribute new version
+
+- Change version in `setup.py` (2x)
+- Change version in `docs/source/conf.py`
+- Run `python setup.py sdist`
+- Git push
+- Run `twine upload --repository-url https://pypi.org/project/naclib/ dist\naclib-<newversion>.tar.gz
+`
