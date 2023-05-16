@@ -111,4 +111,3 @@ sphinx-build -b html docs/source docs/build
 - Run `python setup.py sdist`
 - Git push
 - Run `twine upload --repository-url https://upload.pypi.org/legacy/ dist/*`
-`
