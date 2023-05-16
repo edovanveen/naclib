@@ -26,5 +26,6 @@ in the NACLib code.
    :toctree: _autosummary
    :recursive:
 
+   naclib.main
    naclib.stpol
    naclib.util

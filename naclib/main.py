@@ -7,7 +7,8 @@ import naclib.stpol
 
 
 class DistortionCorrection:
-    """Class for...
+    """Class with sklearn-like fit/predict interface for ST-polynomial decomposition distortion correction.
+    Can be called as `naclib.DistortionCorrection()` directly.
 
     Parameters
     ----------
