@@ -7,6 +7,10 @@ polynomial gradients to decompose the distortion between two images,
 correcting both affine and higher-order components of the distortion 
 in a single step, while requiring only minimal reference data.
 
+## Full documentation
+
+Full documentation is available at https://edovanveen.github.io/naclib/.
+
 ## Installation
 
 ### Manual installation
@@ -23,12 +27,6 @@ pip install naclib
 ```
 
 ## Usage
-
-### Full documentation
-
-Full documentation is available at https://edovanveen.github.io/naclib/.
-
-### Example
 
 The calibration data needs to be:
 - of size `(n, 2)`, with `n` the number of spots
