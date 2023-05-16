@@ -81,7 +81,7 @@
 <p>The calibration data needs to be:</p>
 <ul class="simple">
 <li><p>of size <code class="docutils literal notranslate"><span class="pre">(n,</span> <span class="pre">2)</span></code>, with <code class="docutils literal notranslate"><span class="pre">n</span></code> the number of spots</p></li>
-<li><p>spot-paired</p></li>
+<li><p>spot-paired, so <code class="docutils literal notranslate"><span class="pre">locs0_calibration[i,</span> <span class="pre">:]</span></code> corresponds to <code class="docutils literal notranslate"><span class="pre">locs1_calibration[i,</span> <span class="pre">:]</span></code> for each <code class="docutils literal notranslate"><span class="pre">i</span></code></p></li>
 <li><p>rescaled to within the unit circle</p></li>
 </ul>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">locs0_calibration</span>  <span class="c1"># Calibration data for channel 0</span>
@@ -90,15 +90,27 @@
 </div>
 <p>There are some utility functions available to help you rescale
 data to the unit circle, and find spot pairs in the calibration dataset:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find the nearest neighbours; rescale to unit circle.</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">naclib.util</span>
+
+<span class="c1"># Find the nearest neighbours; rescale to unit circle.</span>
 <span class="n">fig_size</span> <span class="o">=</span> <span class="p">[</span><span class="mi">512</span><span class="p">,</span> <span class="mi">512</span><span class="p">]</span>  <span class="c1"># image size in pixels</span>
 <span class="n">threshold</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># threshold in pixels for nearest neighbor detection</span>
+
+<span class="c1"># Find nearest neighbours within threshold distance.</span>
 <span class="n">mapping</span> <span class="o">=</span> <span class="n">naclib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">find_neighbours</span><span class="p">(</span><span class="n">locs0_calibration_raw</span><span class="p">,</span>
                                       <span class="n">locs1_calibration_raw</span><span class="p">,</span>
                                       <span class="n">threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">)</span>
+
+<span class="c1"># Make spot pairs.</span>
 <span class="n">locs0_pairs</span><span class="p">,</span> <span class="n">locs1_pairs</span> <span class="o">=</span> <span class="n">naclib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">make_pairs</span><span class="p">(</span><span class="n">locs0_raw</span><span class="p">,</span> <span class="n">locs1_raw</span><span class="p">,</span> <span class="n">mapping</span><span class="p">)</span>
+
+<span class="c1"># Rescale to unit circle.</span>
 <span class="n">locs0_calibration</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">naclib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">loc_to_unitcircle</span><span class="p">(</span><span class="n">locs0_pairs</span><span class="p">,</span> <span class="n">fig_size</span><span class="p">)</span>
 <span class="n">locs1_calibration</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">naclib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">loc_to_unitcircle</span><span class="p">(</span><span class="n">locs1_pairs</span><span class="p">,</span> <span class="n">fig_size</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Location arrays can be transformed back to their original coordinate system using:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">locs0_orig</span> <span class="o">=</span> <span class="n">naclib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">unitcircle_to_loc</span><span class="p">(</span><span class="n">locs0_calibration</span><span class="p">,</span> <span class="n">fig_size</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The measurement data needs to be:</p>
@@ -116,9 +128,7 @@ and its sklearn-style fit/predict methods:</p>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="c1"># Get distortion field.</span>
-<span class="n">distortion_field</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">locs0_calibration</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="n">distortion_field</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">locs1_calibration</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">locs0_calibration</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
-<span class="n">distortion_field</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">locs1_calibration</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">locs0_calibration</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">distortion_field</span> <span class="o">=</span> <span class="n">locs1_calibration</span> <span class="o">-</span> <span class="n">locs0_calibration</span>
 
 <span class="c1"># Get ST polynomial decomposition coefficients.</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">naclib</span><span class="o">.</span><span class="n">DistortionCorrection</span><span class="p">()</span>
