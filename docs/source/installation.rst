@@ -1,5 +1,6 @@
 Installation
 ====================================
 
-``pip install naclib``
+This should do the trick:
 
+``pip install naclib``

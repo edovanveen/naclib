@@ -8,7 +8,7 @@ Welcome to the NACLib documentation
    first run <firstrun>
 
 API
-########
+###
 
 Here you can find the full documentation of every single class and function
 in the NACLib code.
